@@ -5,3 +5,19 @@
 body {
     @apply bg-ctp-base text-ctp-text;
 }
+
+.a-btn {
+    @apply bg-ctp-yellow text-ctp-crust;
+}
+
+input {
+    border-radius: .5em 0 0 .5em;
+    padding: .4em .8em;
+    width: 100%;
+
+    @apply bg-ctp-crust;
+}
+
+input:focus-visible {
+    outline: none;
+}
