@@ -1,7 +1,7 @@
 <script lang="ts">
     import { browser } from "$app/environment";
     import { onMount } from "svelte";
-    import { setCookie } from "typescript-cookie";
+    import { setCookie, getCookie } from "typescript-cookie";
 
     let code: string | null = null;
     let status = "loading";
@@ -23,7 +23,9 @@
 
                     setCookie("access_token", data.access_token, { expires: 60 * 60 * 24 * 7 });
 
-                    window.location.href = "/";
+                    const redirect = getCookie("redirect") || "/";
+
+                    window.location.href = redirect;
                 } else {
                     status = "Failed to authorize with GitHub";
                 }
