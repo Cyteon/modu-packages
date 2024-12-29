@@ -1,10 +1,10 @@
 <script lang="ts">
     import NavBar from "$lib/components/NavBar.svelte";
+    import Footer from "$lib/components/Footer.svelte";
 </script>
 
-<div class="h-screen w-full">
+<div class="flex flex-col h-screen w-full">
     <NavBar />
 
-    <h1>Welcome to SvelteKit</h1>
-    <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+    <Footer />
 </div>
