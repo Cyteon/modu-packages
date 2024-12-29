@@ -13,5 +13,6 @@ export async function GET({ request }) {
         return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    return Response.json({ userId: found.userId });
-}
+    // return pure text
+    return new Response(found.userId.toString());
+};
