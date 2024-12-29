@@ -7,12 +7,11 @@ export async function GET({ request }) {
         return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const found = CliCode.findOne({ code });
+    const found = await CliCode.findOne({ code });
 
     if (!found) {
         return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // return pure text
     return new Response(found.userId.toString());
 };
