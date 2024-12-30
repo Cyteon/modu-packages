@@ -1,4 +1,4 @@
-import CliCode from '$lib/models/cliCode';
+import CliCode from '$lib/models/CliCode';
 
 export async function GET({ request }) {
     const token = request.headers.get('Authorization');

@@ -27,6 +27,7 @@
 	},
 	"dependencies": {
 		"lucide-svelte": "^0.469.0",
+		"minio": "^7.1.2",
 		"mongoose": "^8.9.2",
 		"typescript-cookie": "^1.0.6"
 	}
