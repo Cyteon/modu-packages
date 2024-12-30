@@ -1,6 +1,18 @@
 import Release from '$lib/models/Release';
+import Package from '$lib/models/Package';
 
-export async function GET({ params }) {
+async function updateStats(pkg, release) {
+    pkg.downloadCount++;
+    await pkg.save();
+
+    release.downloadCount++;
+    await release.save();
+}
+
+export async function GET({ params, url }) {
+    let searchParams = new URLSearchParams(url.search);
+    let forDownload = (searchParams.get('isDownload') || "false") === "true"
+
     const { name, version } = params;
     let release;
 
@@ -13,10 +25,18 @@ export async function GET({ params }) {
     }
 
     if (!release) {
-        return new Response('Not found', { status: 404 });
+        return new Response(`Package ${name}, version ${version} not found`, { status: 404 });
     }
+
+    if (forDownload) {
+        Promise.all([
+            updateStats(name, release),
+        ]);
+    }
+
+    const { downloadCount } = await Package.findOne({ name });
 
     const { zipUrl, readme, description } = release;
 
-    return new Response(JSON.stringify({ zipUrl, readme, description, version: release.version }));
+    return new Response(JSON.stringify({ zipUrl, readme, description, version: release.version, downloadCount }));
 }

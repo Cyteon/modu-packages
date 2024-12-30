@@ -5,6 +5,7 @@ export interface Package {
     name: string;
     description?: string;
     latestVersion?: string;
+    downloadCount?: number;
 }
 
 const schema = new mongoose.Schema<Package>({
@@ -12,7 +13,7 @@ const schema = new mongoose.Schema<Package>({
         type: String,
         required: true,
     },
-    
+
     name: {
         type: String,
         required: true,
@@ -24,6 +25,11 @@ const schema = new mongoose.Schema<Package>({
 
     latestVersion: {
         type: String,
+    },
+
+    downloadCount: {
+        type: Number,
+        default: 0,
     },
 });
 

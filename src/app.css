@@ -21,3 +21,11 @@ input {
 input:focus-visible {
     outline: none;
 }
+
+.prose h1 {
+    margin-bottom: 0;
+}
+
+.prose p {
+    margin-top: 0;
+}

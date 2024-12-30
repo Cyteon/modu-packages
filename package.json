@@ -26,7 +26,10 @@
 		"vite": "^5.4.11"
 	},
 	"dependencies": {
+		"@tailwindcss/typography": "^0.5.15",
+		"dompurify": "^3.2.3",
 		"lucide-svelte": "^0.469.0",
+		"marked": "^15.0.4",
 		"minio": "^7.1.2",
 		"mongoose": "^8.9.2",
 		"typescript-cookie": "^1.0.6"
