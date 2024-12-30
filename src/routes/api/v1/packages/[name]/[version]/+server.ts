@@ -5,7 +5,7 @@ export async function GET({ params }) {
     let release;
 
     if (version === 'latest') {
-        release = await Release.findOne({ packageName: name }).sort({ createdAt: -1 });
+        release = await Release.findOne({ packageName: name }).sort({ version: -1 });
     }
 
     if (!release) {
