@@ -28,15 +28,15 @@ export async function GET({ params, url }) {
         return new Response(`Package ${name}, version ${version} not found`, { status: 404 });
     }
 
+    const pkg = await Package.findOne({ name });
+
     if (forDownload) {
         Promise.all([
-            updateStats(name, release),
+            updateStats(pkg, release)
         ]);
     }
 
-    const { downloadCount } = await Package.findOne({ name });
-
     const { zipUrl, readme, description } = release;
 
-    return new Response(JSON.stringify({ zipUrl, readme, description, version: release.version, downloadCount }));
+    return new Response(JSON.stringify({ zipUrl, readme, description, version: release.version, downloadCount: pkg.downloadCount }));
 }
