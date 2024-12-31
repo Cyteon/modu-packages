@@ -44,13 +44,16 @@
         </div>
     {:else}
         <div class="flex flex-col mx-auto w-full md:w-1/2 mt-16">
-            <div class="flex">
-                <div>
+            <div>
+                <div class="flex">
                     <h1 class="text-4xl font-bold">{data.props.name}</h1>
-                    <p class="text-lg">{pkg.description}</p>
-                    <p class="text-ctp-subtext0 mt-2">{pkg.downloadCount} downloads</p>
+                    <p class="text-ctp-subtext0 ml-auto text-lg">v{pkg.version}</p>
                 </div>
-                <p class="text-2xl ml-auto text-ctp-subtext0">{pkg.version}</p>
+                <p class="text-lg">{pkg.description}</p>
+                <div class="flex mt-2">
+                    <p class="text-ctp-subtext0">{pkg.downloadCount} downloads</p>
+                    <a href={pkg.zipUrl} target="_blank" rel="noopener noreferrer" class="ml-auto text-ctp-blue hover:underline">Download ZIP</a>
+                </div>
             </div>
             <code class="bg-ctp-mantle rounded-md p-4 mt-4">modu install {data.props.name}@{pkg.version}</code>
             <div class="bg-ctp-mantle rounded-md mt-4 p-4">
