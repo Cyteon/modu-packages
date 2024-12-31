@@ -56,6 +56,10 @@ export async function POST({ request }) {
         return new Response(`Version ${version} already exists`, { status: 409 });
     }
 
+    if (file.length === 0) {
+        return new Response('Empty file', { status: 400 });
+    }
+
     if (file.length > 1000000) {
         return new Response('File too large', { status: 413 });
     }
@@ -64,6 +68,7 @@ export async function POST({ request }) {
 
     client.putObject(S3_BUCKET, `${name}/${version}.zip`, buffer, (err, etag) => {
         if (err) {
+            console.error(err);
             return new Response('Internal server error', { status: 500 });
         }
 

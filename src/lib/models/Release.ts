@@ -5,7 +5,7 @@ export interface Release {
     version: string;
     zipUrl: string;
     readme: string;
-    description: string;
+    description?: string;
     downloadCount: number;
     createdAt?: Date;
 }
@@ -38,7 +38,7 @@ const schema = new mongoose.Schema<Release>({
 
     description: {
         type: String,
-        required: true,
+        required: false,
     },
 
     createdAt: {
