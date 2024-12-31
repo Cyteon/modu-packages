@@ -47,7 +47,7 @@
             <div>
                 <div class="flex">
                     <h1 class="text-4xl font-bold">{data.props.name}</h1>
-                    <p class="text-ctp-subtext0 ml-auto text-lg">v{pkg.version}</p>
+                    <p class="text-ctp-subtext0 ml-auto text-xl">v{pkg.version}</p>
                 </div>
                 <p class="text-lg">{pkg.description}</p>
                 <div class="flex mt-2">
