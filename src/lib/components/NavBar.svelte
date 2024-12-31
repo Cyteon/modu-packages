@@ -40,7 +40,7 @@
         {:else}
             <a 
                 href={`https://github.com/login/oauth/authorize?client_id=${PUBLIC_GITHUB_CLIENT_ID}`}
-                class="text-2xl h-fit my-auto leading-relaxed px-2 a-btn rounded-md"
+                class="text-2xl h-fit my-auto leading-relaxed px-3 pb-0.5 a-btn rounded-md"
             >
                 Login
             </a>
