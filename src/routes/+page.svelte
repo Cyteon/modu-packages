@@ -36,7 +36,7 @@
                 <a class="bg-ctp-mantle rounded-md p-4 border border-ctp-mantle hover:border-ctp-surface0 transition-all duration-300" href={`/package/${pkg.name}`}>
                     <div class="flex">
                         <h1 class="text-xl font-semibold">{pkg.name}</h1>
-                        <p class="ml-auto text-ctp-subtext0">{pkg.latestVersion}</p>
+                        <p class="ml-auto text-ctp-subtext0">v{pkg.latestVersion}</p>
                     </div>
                     <p class="text-lg">{pkg.description}</p>
                     <p class="mt-2 text-ctp-subtext0">{pkg.downloadCount} downloads</p>
