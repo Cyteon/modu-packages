@@ -43,7 +43,7 @@
             <p class="text-xl text-ctp-red">{error}</p>
         </div>
     {:else}
-        <div class="flex flex-col mx-auto w-full md:w-1/2 mt-16">
+        <div class="flex flex-col px-2 mx-auto w-full md:w-1/2 mt-16 mb-4">
             <div>
                 <div class="flex">
                     <h1 class="text-4xl font-bold">{data.props.name}</h1>

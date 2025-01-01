@@ -32,7 +32,7 @@
     <div class="flex flex-col w-full justify-center items-center mt-6">
         <h1 class="text-2xl font-semibold">Search results</h1>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4 px-64 w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4 px-2 md:px-8 lg:px-12 xl:px-64 w-full mb-4">
             {#each packages as pkg}
                 <a class="bg-ctp-mantle rounded-md p-4 border border-ctp-mantle hover:border-ctp-surface0 transition-all duration-300" href={`/package/${pkg.name}`}>
                     <div class="flex">
