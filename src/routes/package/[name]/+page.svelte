@@ -52,7 +52,7 @@
                 <p class="text-lg">{pkg.description}</p>
                 <div class="flex mt-2">
                     <p class="text-ctp-subtext0">{pkg.downloadCount} downloads</p>
-                    <a href={pkg.zipUrl + "?isDownload=true"} target="_blank" rel="noopener noreferrer" class="ml-auto text-ctp-blue hover:underline">Download ZIP</a>
+                    <a href={pkg.zipUrl} target="_blank" rel="noopener noreferrer" class="ml-auto text-ctp-blue hover:underline">Download ZIP</a>
                 </div>
             </div>
             <code class="bg-ctp-mantle rounded-md p-4 mt-4">modu install {data.props.name}@{pkg.version}</code>
