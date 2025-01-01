@@ -34,13 +34,16 @@
 
             {#if showUserMenu}
                 <div class="absolute mt-12 bg-ctp-crust rounded-md border border-ctp-surface0 text-xl w-36 flex flex-col">
+                    <!--
                     <a href="/dashboard" class="w-full text-left px-2 py-1 hover:bg-ctp-surface0 rounded-t-md">
                         Dashboard
                     </a>
                     
                     <hr class="border-ctp-surface0" />
 
-                    <button class="w-full text-left px-2 py-1 hover:bg-ctp-surface0 rounded-b-md" on:click={() => {
+                    -->
+
+                    <button class="w-full text-left px-2 py-1 hover:bg-ctp-surface0 rounded-md" on:click={() => {
                         removeCookie("access_token");
                         state.user = null;  
                     }}>
