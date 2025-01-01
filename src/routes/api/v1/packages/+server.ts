@@ -64,11 +64,11 @@ export async function POST({ request }) {
         return new Response('File too large', { status: 413 });
     }
 
-    if (file.length >= 4 && file[0] === 0x50 && file[1] === 0x4b && file[2] === 0x03 && file[3] === 0x04) {
+    let buffer = Buffer.from(file);
+
+    if (!buffer.slice(0,4).equals(Buffer.from([0x50, 0x4b, 0x03, 0x04]))) {
         return new Response('Invalid zip file', { status: 400 });
     }
-
-    let buffer = Buffer.from(file);
 
     client.putObject(S3_BUCKET, `${name}/${version}.zip`, buffer, (err, etag) => {
         if (err) {
