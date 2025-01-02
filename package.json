@@ -28,6 +28,7 @@
 	},
 	"dependencies": {
 		"@tailwindcss/typography": "^0.5.15",
+		"dexie": "^4.0.10",
 		"dompurify": "^3.2.3",
 		"lucide-svelte": "^0.469.0",
 		"marked": "^15.0.4",

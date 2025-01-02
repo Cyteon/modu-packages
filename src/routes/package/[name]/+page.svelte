@@ -4,6 +4,7 @@
     import { onMount } from "svelte";
     import { marked } from "marked";
     import DOMPurify from "dompurify";
+  import { getUser } from "$lib/db.js";
 
     export let data;
 
@@ -23,7 +24,9 @@
 
         if (res.ok) {
             pkg = await res.json();
+
             pkg.readme = DOMPurify.sanitize(marked(pkg.readme));
+            pkg.username = (await getUser(pkg.ownerId)).username;
         } else {
             error = await res.text();
 
@@ -54,6 +57,7 @@
                     <p class="text-ctp-subtext0">{pkg.downloadCount} downloads</p>
                     <a href={pkg.zipUrl} target="_blank" rel="noopener noreferrer" class="ml-auto text-ctp-blue hover:underline">Download ZIP</a>
                 </div>
+                <p class="mt-2 text-lg">Made by <a href={`https://github.com/${pkg.username}`} class="text-ctp-blue hover:underline">{pkg.username}</a></p>
             </div>
             <code class="bg-ctp-mantle rounded-md p-4 mt-4">modu install {data.props.name}@{pkg.version}</code>
             <div class="bg-ctp-mantle rounded-md mt-4 p-4">

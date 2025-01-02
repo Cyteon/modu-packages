@@ -3,6 +3,7 @@
     import Footer from "$lib/components/Footer.svelte";
     import { onMount } from "svelte";
     import { browser } from "$app/environment";
+  import { getUser } from "$lib/db";
 
     let packages = [];
     let query = "";
@@ -21,7 +22,13 @@
                 window.location.href = `/package/${data[0].name}`;
             }
 
-            packages = data;
+            packages = await Promise.all(data.map(async (pkg) => {
+                const user = await getUser(pkg.ownerId);
+                return {
+                    ...pkg,
+                    username: user?.username || "Unknown"
+                };
+            }));
         }
     });
 </script>
@@ -40,7 +47,10 @@
                         <p class="ml-auto text-ctp-subtext0">v{pkg.latestVersion}</p>
                     </div>
                     <p class="text-lg">{pkg.description}</p>
-                    <p class="mt-2 text-ctp-subtext0">{pkg.downloadCount} downloads</p>
+                    <div class="flex">
+                        <p class="mt-2 text-ctp-subtext0">{pkg.downloadCount} downloads</p>
+                        <p class="mt-2 ml-auto text-ctp-subtext0">By {pkg.username}</p>
+                    </div>
                 </a>
             {/each}
         </div>

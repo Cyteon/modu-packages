@@ -38,5 +38,5 @@ export async function GET({ params, url }) {
 
     const { zipUrl, readme, description } = release;
 
-    return new Response(JSON.stringify({ zipUrl, readme, description, version: release.version, downloadCount: pkg.downloadCount }));
+    return new Response(JSON.stringify({ zipUrl, readme, description, version: release.version, downloadCount: pkg.downloadCount, ownerId: pkg.ownerId }));
 }
