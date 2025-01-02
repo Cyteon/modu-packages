@@ -21,7 +21,7 @@ export async function getUser(id: number) {
         let data = await fetch(`https://api.github.com/user/${id}`).then(res => res.json());
         cache.users.add({ id, username: data.login || "(not found)", cachedAt: Date.now() });
 
-        return user;
+        return { id, username: data.login || "(not found)" };
     }
 
     return user;
