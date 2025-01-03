@@ -14,7 +14,7 @@
         <Book class="h-6 w-6" />
     </a>
 
-    <a href="https://www.cyteon.tech/modu" target="_blank" rel="noopener noreferrer" class="hover:text-ctp-yellow transition-all duration-300 ml-2">
+    <a href="https://www.cyteon.tech/modu" target="_blank" rel="noopener noreferrer" class="hover:text-ctp-yellow transition-all duration-300 ml-3">
         <img src="/favicon.webp" class="h-6 w-6" />
     </a>
 </footer>
