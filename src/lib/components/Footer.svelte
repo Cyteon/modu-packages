@@ -10,11 +10,11 @@
         <GithubIcon class="h-6 w-6" />
     </a>
 
-    <a href="https://www.cyteon.tech/modu/docs/libraries" target="_blank" rel="noopener noreferrer" class="ml-auto hover:text-ctp-yellow transition-all duration-300">
+    <a href="https://www.cyteon.tech/modu/docs/libraries" target="_blank" rel="noopener noreferrer" class="hover:text-ctp-yellow transition-all duration-300">
         <Book class="h-6 w-6" />
     </a>
 
-    <a href="https://www.cyteon.tech/modu" target="_blank" rel="noopener noreferrer" class="ml-auto hover:text-ctp-yellow transition-all duration-300">
+    <a href="https://www.cyteon.tech/modu" target="_blank" rel="noopener noreferrer" class="hover:text-ctp-yellow transition-all duration-300">
         <img src="/favicon.webp" class="h-6 w-6" />
     </a>
 </footer>
