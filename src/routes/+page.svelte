@@ -37,7 +37,7 @@
 <div class="flex flex-col h-screen w-full">
     <NavBar />
 
-    <h1 class="text-4xl font-bold text-center mt-16">Hosting the packages of the future</h1>
+    <h1 class="text-4xl font-bold text-center mt-16">Packages for the modu programming language</h1>
     <p class="text-center text-lg mt-1">Currently hosting <span class="font-bold">{totalPackages}</span> packages with a total of <span class="font-bold">{totalDownloads}</span> downloads</p>
 
     <div class="flex flex-col w-full justify-center items-center mt-6">
