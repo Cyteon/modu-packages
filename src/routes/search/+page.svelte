@@ -3,34 +3,38 @@
     import Footer from "$lib/components/Footer.svelte";
     import { onMount } from "svelte";
     import { browser } from "$app/environment";
-  import { getUser } from "$lib/db";
+    import { getUser } from "$lib/db";
+    import { page } from "$app/stores";
 
     let packages = [];
-    let query = "";
 
-    if (browser) {
-        query = new URLSearchParams(window.location.search).get("q");
+    $: currentSearchParams = browser
+        ? Object.fromEntries($page.url.searchParams)
+        : null;
+    
+    $: if (currentSearchParams?.q) {
+        (async () => {
+            const response = await fetch("/api/v1/search?q=" + currentSearchParams.q);
+
+            if (response.ok) {
+                const data = await response.json();
+
+                if (browser && data.length === 1 && data[0].name.toLowerCase() === currentSearchParams.q.toLowerCase()) {
+                    window.location.href = `/package/${data[0].name}`;
+                }
+
+                packages = await Promise.all(data.map(async (pkg) => {
+                    const user = await getUser(pkg.ownerId);
+                    return {
+                        ...pkg,
+                        username: user?.username || "Unknown"
+                    };
+                }));
+            }
+        })();
     }
     
-    onMount(async () => {
-        const response = await fetch("/api/v1/search?q=" + query);
-
-        if (response.ok) {
-            const data = await response.json();
-
-            if (data.length === 1 && data[0].name.toLowerCase() === query.toLowerCase()) {
-                window.location.href = `/package/${data[0].name}`;
-            }
-
-            packages = await Promise.all(data.map(async (pkg) => {
-                const user = await getUser(pkg.ownerId);
-                return {
-                    ...pkg,
-                    username: user?.username || "Unknown"
-                };
-            }));
-        }
-    });
+    
 </script>
 
 <div class="flex flex-col h-screen w-full">

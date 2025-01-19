@@ -53,11 +53,12 @@
                     <p class="text-ctp-subtext0 ml-auto text-xl">v{pkg.version}</p>
                 </div>
                 <p class="text-lg">{pkg.description}</p>
-                <div class="flex mt-2">
-                    <p class="text-ctp-subtext0">{pkg.downloadCount} downloads</p>
+                <p class="text-ctp-subtext0 mt-2">{pkg.downloadCount} downloads</p>
+
+                <div class="flex">
+                    <p class="text-lg">Made by <a href={`https://github.com/${pkg.username}`} class="text-ctp-blue hover:underline">{pkg.username}</a></p>
                     <a href={pkg.zipUrl} target="_blank" rel="noopener noreferrer" class="ml-auto text-ctp-blue hover:underline">Download ZIP</a>
                 </div>
-                <p class="mt-2 text-lg">Made by <a href={`https://github.com/${pkg.username}`} class="text-ctp-blue hover:underline">{pkg.username}</a></p>
             </div>
             <code class="bg-ctp-mantle rounded-md p-4 mt-4">modu install {data.props.name}@{pkg.version}</code>
             <div class="bg-ctp-mantle rounded-md mt-4 p-4">
