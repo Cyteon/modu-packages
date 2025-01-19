@@ -1,5 +1,4 @@
 <script lang="ts">
-    import state from "$lib/state.svelte";
     import { onMount } from "svelte";
     import { getCookie, setCookie, removeCookie } from "typescript-cookie";
     import { PUBLIC_GITHUB_CLIENT_ID } from "$env/static/public";

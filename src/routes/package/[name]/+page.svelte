@@ -4,7 +4,7 @@
     import { onMount } from "svelte";
     import { marked } from "marked";
     import DOMPurify from "dompurify";
-  import { getUser } from "$lib/db.js";
+    import { getUser } from "$lib/db.js";
 
     export let data;
 

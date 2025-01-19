@@ -1,7 +1,6 @@
 <script lang="ts">
     import NavBar from "$lib/components/NavBar.svelte";
     import Footer from "$lib/components/Footer.svelte";
-    import { onMount } from "svelte";
     import { browser } from "$app/environment";
     import { getUser } from "$lib/db";
     import { page } from "$app/stores";
