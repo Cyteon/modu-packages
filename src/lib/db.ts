@@ -19,6 +19,8 @@ export async function getUser(id: number) {
 
     if (!user || Date.now() - user.cachedAt > 1000 * 60 * 60 * 24) {
         let data = await fetch(`https://api.github.com/user/${id}`).then(res => res.json());
+
+        cache.users.delete(id);
         cache.users.add({ id, username: data.login || "(not found)", cachedAt: Date.now() });
 
         return { id, username: data.login || "(not found)" };
