@@ -1,17 +1,17 @@
-import CliCode from '$lib/models/CliCode';
+import CliCode from "$lib/models/CliCode";
 
 export async function GET({ request }) {
-    const code = request.headers.get('Authorization');
+  const code = request.headers.get("Authorization");
 
-    if (!code) {
-        return Response.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+  if (!code) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-    const found = await CliCode.findOne({ code });
+  const found = await CliCode.findOne({ code });
 
-    if (!found) {
-        return Response.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+  if (!found) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-    return new Response(found.userId.toString());
-};
+  return new Response(found.userId.toString());
+}

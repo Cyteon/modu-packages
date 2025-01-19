@@ -1,7 +1,7 @@
 export function load({ params }) {
-    return {
-        props: {
-            name: params.name,
-        },
-    };
+  return {
+    props: {
+      name: params.name,
+    },
+  };
 }

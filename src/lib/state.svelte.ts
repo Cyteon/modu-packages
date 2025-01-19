@@ -1,7 +1,5 @@
 export interface StateType {
-  user: null | {
-
-  };
+  user: null | {};
 }
 
 const state: StateType = $state({

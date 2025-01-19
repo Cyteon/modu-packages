@@ -1,31 +1,31 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 body {
-    @apply bg-ctp-base text-ctp-text;
+  @apply bg-ctp-base text-ctp-text;
 }
 
 .a-btn {
-    @apply bg-ctp-yellow text-ctp-crust;
+  @apply bg-ctp-yellow text-ctp-crust;
 }
 
 input {
-    border-radius: .5em 0 0 .5em;
-    padding: .4em .8em;
-    width: 100%;
+  border-radius: 0.5em 0 0 0.5em;
+  padding: 0.4em 0.8em;
+  width: 100%;
 
-    @apply bg-ctp-crust;
+  @apply bg-ctp-crust;
 }
 
 input:focus-visible {
-    outline: none;
+  outline: none;
 }
 
 .prose h1 {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .prose p {
-    margin-top: 0;
+  margin-top: 0;
 }

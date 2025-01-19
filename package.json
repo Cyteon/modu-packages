@@ -1,39 +1,39 @@
 {
-	"name": "modu-packages",
-	"private": true,
-	"version": "0.0.1",
-	"type": "module",
-	"engines": {
-		"node": "18.x"
-	},
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
-	},
-	"devDependencies": {
-		"@catppuccin/tailwindcss": "^0.1.6",
-		"@sveltejs/adapter-auto": "^3.0.0",
-		"@sveltejs/kit": "^2.0.0",
-		"@sveltejs/vite-plugin-svelte": "^4.0.0",
-		"@types/node": "^22.10.3",
-		"autoprefixer": "^10.4.20",
-		"svelte": "^5.0.0",
-		"svelte-check": "^4.0.0",
-		"tailwindcss": "^3.4.9",
-		"typescript": "^5.0.0",
-		"vite": "^5.4.11"
-	},
-	"dependencies": {
-		"@tailwindcss/typography": "^0.5.15",
-		"dexie": "^4.0.10",
-		"dompurify": "^3.2.3",
-		"lucide-svelte": "^0.469.0",
-		"marked": "^15.0.4",
-		"minio": "^7.1.2",
-		"mongoose": "^8.9.2",
-		"typescript-cookie": "^1.0.6"
-	}
+  "name": "modu-packages",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+  },
+  "devDependencies": {
+    "@catppuccin/tailwindcss": "^0.1.6",
+    "@sveltejs/adapter-auto": "^3.0.0",
+    "@sveltejs/kit": "^2.0.0",
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@types/node": "^22.10.3",
+    "autoprefixer": "^10.4.20",
+    "svelte": "^5.0.0",
+    "svelte-check": "^4.0.0",
+    "tailwindcss": "^3.4.9",
+    "typescript": "^5.0.0",
+    "vite": "^5.4.11"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "dexie": "^4.0.10",
+    "dompurify": "^3.2.3",
+    "lucide-svelte": "^0.469.0",
+    "marked": "^15.0.4",
+    "minio": "^7.1.2",
+    "mongoose": "^8.9.2",
+    "typescript-cookie": "^1.0.6"
+  }
 }

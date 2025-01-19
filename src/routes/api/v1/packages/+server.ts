@@ -1,93 +1,100 @@
-import CliCode from '$lib/models/CliCode';
-import Release from '$lib/models/Release';
-import Package from '$lib/models/Package';
-import { Client } from 'minio';
-import { S3_ENDPOINT, S3_PORT, S3_SECURE, S3_SECRET_KEY, S3_ACCESS_KEY, S3_BUCKET } from '$env/static/private';
+import CliCode from "$lib/models/CliCode";
+import Release from "$lib/models/Release";
+import Package from "$lib/models/Package";
+import { Client } from "minio";
+import {
+  S3_ENDPOINT,
+  S3_PORT,
+  S3_SECURE,
+  S3_SECRET_KEY,
+  S3_ACCESS_KEY,
+  S3_BUCKET,
+} from "$env/static/private";
 
 var client = new Client({
-    endPoint: S3_ENDPOINT,
-    port: parseInt(S3_PORT),
-    useSSL: S3_SECURE === 'true',
-    accessKey: S3_ACCESS_KEY,
-    secretKey: S3_SECRET_KEY,
+  endPoint: S3_ENDPOINT,
+  port: parseInt(S3_PORT),
+  useSSL: S3_SECURE === "true",
+  accessKey: S3_ACCESS_KEY,
+  secretKey: S3_SECRET_KEY,
 });
 
 export async function POST({ request }) {
-    const code = request.headers.get('Authorization');
+  const code = request.headers.get("Authorization");
 
-    if (!code) {
-        return new Response('Unauthorized', { status: 401 });
-    }
+  if (!code) {
+    return new Response("Unauthorized", { status: 401 });
+  }
 
-    const found = await CliCode.findOne({ code });
+  const found = await CliCode.findOne({ code });
 
-    if (!found) {
-        return new Response('Unauthorized', { status: 401 });
-    }
+  if (!found) {
+    return new Response("Unauthorized", { status: 401 });
+  }
 
-    let { name, version, file, readme, description } = await request.json();
+  let { name, version, file, readme, description } = await request.json();
 
-    if (!name || !version || !file) {
-        return new Response('Invalid request', { status: 400 });
-    }
+  if (!name || !version || !file) {
+    return new Response("Invalid request", { status: 400 });
+  }
 
-    if (!readme) {
-        readme = "No readme provided";
-    }
+  if (!readme) {
+    readme = "No readme provided";
+  }
 
-    let pkg = await Package.findOne({ name });
+  let pkg = await Package.findOne({ name });
 
-    if (!pkg) {
-        pkg = new Package({ name, ownerId: found.userId });
-        await pkg.save();
-    }
-
-    if (pkg.ownerId != found.userId) {
-        return new Response('You do not own this package', { status: 403 });
-    }
-
-    pkg.description = description;
-    pkg.latestVersion = version;
+  if (!pkg) {
+    pkg = new Package({ name, ownerId: found.userId });
     await pkg.save();
+  }
 
-    let release = await Release.findOne({ packageName: name, version });
+  if (pkg.ownerId != found.userId) {
+    return new Response("You do not own this package", { status: 403 });
+  }
 
-    if (release) {
-        return new Response(`Version ${version} already exists`, { status: 409 });
+  pkg.description = description;
+  pkg.latestVersion = version;
+  await pkg.save();
+
+  let release = await Release.findOne({ packageName: name, version });
+
+  if (release) {
+    return new Response(`Version ${version} already exists`, { status: 409 });
+  }
+
+  if (file.length === 0) {
+    return new Response("Empty file", { status: 400 });
+  }
+
+  if (file.length > 1000000) {
+    return new Response("File too large", { status: 413 });
+  }
+
+  let buffer = Buffer.from(file);
+
+  if (!buffer.slice(0, 4).equals(Buffer.from([0x50, 0x4b, 0x03, 0x04]))) {
+    return new Response("Invalid zip file", { status: 400 });
+  }
+
+  client.putObject(S3_BUCKET, `${name}/${version}.zip`, buffer, (err, etag) => {
+    if (err) {
+      console.error(err);
+      return new Response("Internal server error", { status: 500 });
     }
 
-    if (file.length === 0) {
-        return new Response('Empty file', { status: 400 });
-    }
+    console.log(`Uploaded ${name}/${version}.zip with etag ${etag}`);
+  });
 
-    if (file.length > 1000000) {
-        return new Response('File too large', { status: 413 });
-    }
+  release = new Release({
+    packageName: name,
+    version,
+    zipUrl: `${S3_SECURE === "true" ? "https" : "http"}://${S3_ENDPOINT}:${S3_PORT}/${S3_BUCKET}/${name}/${version}.zip`,
+    readme,
+    description,
+  });
 
-    let buffer = Buffer.from(file);
+  await release.save();
 
-    if (!buffer.slice(0,4).equals(Buffer.from([0x50, 0x4b, 0x03, 0x04]))) {
-        return new Response('Invalid zip file', { status: 400 });
-    }
-
-    client.putObject(S3_BUCKET, `${name}/${version}.zip`, buffer, (err, etag) => {
-        if (err) {
-            console.error(err);
-            return new Response('Internal server error', { status: 500 });
-        }
-
-        console.log(`Uploaded ${name}/${version}.zip with etag ${etag}`);
-    });
-
-    release = new Release({ 
-        packageName: name, 
-        version, 
-        zipUrl: `${S3_SECURE === 'true' ? 'https' : 'http'}://${S3_ENDPOINT}:${S3_PORT}/${S3_BUCKET}/${name}/${version}.zip`, 
-        readme,
-        description,
-    });
-
-    await release.save();
-
-    return new Response('OK');
+  return new Response("OK");
 }
